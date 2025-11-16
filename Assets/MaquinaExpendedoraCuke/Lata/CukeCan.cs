@@ -3,6 +3,7 @@ using UnityEngine;
 public class CukeCan : MonoBehaviour
 {
     public bool isEmpty = false;
+    public ParticleSystem dropletsParticules;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,5 +23,14 @@ public class CukeCan : MonoBehaviour
 
     public void activatedTest(){
         Debug.Log("Activado");
+    }
+
+    public void spilLiquid()
+    {
+        if (!isEmpty)
+        {
+            dropletsParticules.Play();
+            isEmpty = true;
+        }
     }
 }
