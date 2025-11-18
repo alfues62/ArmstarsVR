@@ -17,14 +17,6 @@ public class CukeCan : MonoBehaviour
         
     }
 
-    public void selectedTest(){
-        Debug.Log("Seleccionado");
-    }
-
-    public void activatedTest(){
-        Debug.Log("Activado");
-    }
-
     public void spilLiquid()
     {
         if (!isEmpty)
