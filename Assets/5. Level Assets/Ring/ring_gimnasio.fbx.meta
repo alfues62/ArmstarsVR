@@ -3,7 +3,17 @@ guid: 2e45b432186ecf84e8710adbb9b5dd92
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cuerdas_ring
+    second: {fileID: 2100000, guid: 7b110959ccc5ab84b8c6eaf91815c290, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: base_ring
+    second: {fileID: 2100000, guid: 75504cc448cf5bc46bfce7f8af73b89f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
