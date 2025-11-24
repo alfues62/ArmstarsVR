@@ -905,13 +905,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1152563281974269331, guid: 0d2acc533a1524b4497c02f7a26660a8, type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4195019259633216603, guid: 0d2acc533a1524b4497c02f7a26660a8, type: 3}
       propertyPath: m_Name
       value: CukeCan
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195019259633216603, guid: 0d2acc533a1524b4497c02f7a26660a8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7499108203280537846, guid: 0d2acc533a1524b4497c02f7a26660a8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -952,10 +952,6 @@ PrefabInstance:
     - target: {fileID: 7499108203280537846, guid: 0d2acc533a1524b4497c02f7a26660a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796237087931657827, guid: 0d2acc533a1524b4497c02f7a26660a8, type: 3}
-      propertyPath: outlineWidth
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
