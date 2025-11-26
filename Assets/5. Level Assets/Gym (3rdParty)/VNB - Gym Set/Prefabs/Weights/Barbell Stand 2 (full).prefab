@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 2631664067659547591}
   - component: {fileID: 8149059087225628743}
   - component: {fileID: 4066298301345846091}
+  - component: {fileID: 6821859255557328321}
+  - component: {fileID: 1284673651907851194}
+  - component: {fileID: 2299234226922850524}
   m_Layer: 0
   m_Name: Barbell Stand 2 (full)
   m_TagString: Untagged
@@ -25,9 +28,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4277914839349345911}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4651425039439064277}
   - {fileID: 2691315649827113738}
@@ -36,7 +41,6 @@ Transform:
   - {fileID: 9090821426526878489}
   - {fileID: 5483893480094958454}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8149059087225628743
 MeshFilter:
@@ -57,11 +61,15 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -87,11 +95,75 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6821859255557328321
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277914839349345911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2440535, y: 0.18472368, z: 1.2483169}
+  m_Center: {x: 0, y: 0.09236184, z: 0}
+--- !u!65 &1284673651907851194
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277914839349345911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12599516, y: 2.106872, z: 0.9213165}
+  m_Center: {x: 0.5590292, y: 1.053436, z: -0.00026591122}
+--- !u!65 &2299234226922850524
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277914839349345911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.085602045, y: 2.106872, z: 0.8538651}
+  m_Center: {x: -0.5792258, y: 1.053436, z: 0.004150063}
 --- !u!1001 &2616983640587459364
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2631664067659547591}
     m_Modifications:
     - target: {fileID: 74341908874022958, guid: 6b9afe6e6028e374d99571549b1a53f4, type: 3}
@@ -143,6 +215,9 @@ PrefabInstance:
       value: Barbell 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b9afe6e6028e374d99571549b1a53f4, type: 3}
 --- !u!4 &2691315649827113738 stripped
 Transform:
@@ -154,6 +229,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2631664067659547591}
     m_Modifications:
     - target: {fileID: 74341908874022958, guid: 6b9afe6e6028e374d99571549b1a53f4, type: 3}
@@ -205,6 +281,9 @@ PrefabInstance:
       value: Barbell 6 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b9afe6e6028e374d99571549b1a53f4, type: 3}
 --- !u!4 &3586437789667787573 stripped
 Transform:
@@ -216,6 +295,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2631664067659547591}
     m_Modifications:
     - target: {fileID: 74341908874022958, guid: a08e9e791cf160240b82abc7077c7e4f, type: 3}
@@ -267,6 +347,9 @@ PrefabInstance:
       value: Barbell 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a08e9e791cf160240b82abc7077c7e4f, type: 3}
 --- !u!4 &4651425039439064277 stripped
 Transform:
@@ -278,6 +361,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2631664067659547591}
     m_Modifications:
     - target: {fileID: 74341908874022958, guid: a08e9e791cf160240b82abc7077c7e4f, type: 3}
@@ -329,6 +413,9 @@ PrefabInstance:
       value: Barbell 2 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a08e9e791cf160240b82abc7077c7e4f, type: 3}
 --- !u!4 &4815649526909845839 stripped
 Transform:
@@ -340,6 +427,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2631664067659547591}
     m_Modifications:
     - target: {fileID: 74341908874022958, guid: 6b9afe6e6028e374d99571549b1a53f4, type: 3}
@@ -391,6 +479,9 @@ PrefabInstance:
       value: Barbell 6 (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b9afe6e6028e374d99571549b1a53f4, type: 3}
 --- !u!4 &5483893480094958454 stripped
 Transform:
@@ -402,6 +493,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2631664067659547591}
     m_Modifications:
     - target: {fileID: 74341908874022958, guid: 6b9afe6e6028e374d99571549b1a53f4, type: 3}
@@ -453,6 +545,9 @@ PrefabInstance:
       value: Barbell 6 (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b9afe6e6028e374d99571549b1a53f4, type: 3}
 --- !u!4 &9090821426526878489 stripped
 Transform:
