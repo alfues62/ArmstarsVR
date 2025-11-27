@@ -10,6 +10,7 @@ public class CuerdaMaquinaGym : MonoBehaviour
 
     public Vector3 positionOriginal;
     public Vector3 scaleOriginal;
+    public float scaleValue = 15;
 
     public bool isGrabbed = false;
 
@@ -41,7 +42,7 @@ public class CuerdaMaquinaGym : MonoBehaviour
     {
         float distancia = Vector3.Distance(restartPosition.transform.localPosition, anchorMachine.transform.localPosition);
 
-        pivotPoint.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z * distancia * (15f/0.3f));
+        pivotPoint.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z * distancia * (scaleValue/0.3f));
         Debug.Log(distancia);
     }
     
