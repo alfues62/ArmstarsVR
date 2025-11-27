@@ -221,6 +221,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2343215529216976294}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6141499724198675580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7588641893291491468}
+  - component: {fileID: 2564347863699071542}
+  m_Layer: 0
+  m_Name: colliders_borders_a (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7588641893291491468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6141499724198675580}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.14780942, w: 0.9890159}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1309876489803296464}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 17}
+--- !u!65 &2564347863699071542
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6141499724198675580}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26002923, y: 0.026996236, z: 0.035552073}
+  m_Center: {x: -0.5075287, y: 0.12, z: -0.0004177373}
 --- !u!1 &6706890571745657090
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +457,59 @@ Transform:
   - {fileID: 5281029327131288417}
   m_Father: {fileID: 1450375921707103835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8125561221478716529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 598865477617328254}
+  - component: {fileID: 8348096911253060095}
+  m_Layer: 0
+  m_Name: colliders_borders_a
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &598865477617328254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8125561221478716529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.14780933, w: 0.9890159}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1309876489803296464}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -17}
+--- !u!65 &8348096911253060095
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8125561221478716529}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2765071, y: 0.032679614, z: 0.037997074}
+  m_Center: {x: 0.49742573, y: 0.12088022, z: -0.0015182085}
 --- !u!1 &8878239710251838995
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +544,8 @@ Transform:
   m_Children:
   - {fileID: 2946674063150932430}
   - {fileID: 8515634496323811185}
+  - {fileID: 598865477617328254}
+  - {fileID: 7588641893291491468}
   - {fileID: 6104066256770967072}
   - {fileID: 1450375921707103835}
   m_Father: {fileID: 2343215529216976294}
@@ -663,6 +771,7 @@ MonoBehaviour:
   restartPosition: {fileID: 6713937944137667775}
   positionOriginal: {x: 0, y: 0, z: 0}
   scaleOriginal: {x: 1, y: 1, z: 15}
+  scaleValue: 15
   isGrabbed: 0
 --- !u!1001 &6925947130923514085
 PrefabInstance:

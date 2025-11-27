@@ -11,6 +11,10 @@ GameObject:
   - component: {fileID: 9086835300527378385}
   - component: {fileID: 2884791637549923047}
   - component: {fileID: 4577352177445585649}
+  - component: {fileID: 518216920628243030}
+  - component: {fileID: 7064488250558839455}
+  - component: {fileID: 8743759090295366135}
+  - component: {fileID: 4631998445115645599}
   m_Layer: 0
   m_Name: Stationary Rowing Machine
   m_TagString: Untagged
@@ -88,6 +92,90 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &518216920628243030
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833558782425002089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4854647, y: 0.31363392, z: 0.41039324}
+  m_Center: {x: -0.003535688, y: 0.45039362, z: -0.70055145}
+--- !u!65 &7064488250558839455
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833558782425002089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.36909932, y: 0.67088133, z: 0.1030885}
+  m_Center: {x: -0.0025461614, y: 0.61733425, z: 0.6924513}
+--- !u!65 &8743759090295366135
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833558782425002089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2025666, y: 0.47999513, z: 0.35498178}
+  m_Center: {x: -0.0019976832, y: 0.5421589, z: 0.8830208}
+--- !u!65 &4631998445115645599
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833558782425002089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.55419266, y: 0.19763619, z: 0.20112884}
+  m_Center: {x: 0, y: 0.4653065, z: 0.43547893}
 --- !u!1 &7455108315364717455
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +471,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 58
       objectReference: {fileID: 0}
+    - target: {fileID: 6141499724198675580, guid: 21572a470e624ef46a42204522f05333, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6247652866884371963, guid: 21572a470e624ef46a42204522f05333, type: 3}
       propertyPath: m_Size.x
       value: 0.6681073
@@ -418,6 +510,10 @@ PrefabInstance:
     - target: {fileID: 7182548145956935224, guid: 21572a470e624ef46a42204522f05333, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 8125561221478716529, guid: 21572a470e624ef46a42204522f05333, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
