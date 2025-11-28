@@ -695,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3ea553b1a9ad846862ede3748b5b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escenaSiguiente: EscenaMaquinaExp
+  escenaSiguiente: GimnasioEscena
   skyboxMaterial: {fileID: 2100000, guid: 34206db13cc7ecd4f884326743b1ace3, type: 2}
   duracionFundido: 1.5
 --- !u!1 &1139854911
