@@ -87,7 +87,8 @@ PrefabInstance:
       value: PC_screen_prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2737272241192943376, guid: e7d4ff651e183ba499f0d58d746deec5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7d4ff651e183ba499f0d58d746deec5, type: 3}
