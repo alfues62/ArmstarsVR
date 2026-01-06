@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EnemyBeaten : MonoBehaviour
 {
@@ -8,6 +8,7 @@ public class EnemyBeaten : MonoBehaviour
     public Material materialDespierto;
     public Material materialDerrotado;
 
+    public GameObject estrellasInconsciente;
 
     public RagdollToggle ragdollscrip;
 
@@ -15,9 +16,9 @@ public class EnemyBeaten : MonoBehaviour
         //Debug.Log("Me han derrotado!");
         ChangeFace(false);
         ragdollscrip.DoRagdoll();
-
+        estrellasInconsciente.SetActive(true);
     }
-    
+
     private void ChangeFace(bool state) { //True = Despierto, False = Derrotado
         if (state)
         {
