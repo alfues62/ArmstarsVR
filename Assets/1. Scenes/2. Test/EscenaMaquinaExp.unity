@@ -2888,6 +2888,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2590369626156090161, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308451658074478290, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453333164037704769, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8453054675035652621, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
       propertyPath: m_Name
       value: Enemigo_persona
@@ -2931,6 +2943,10 @@ PrefabInstance:
     - target: {fileID: 9080550820667513015, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9109702873881212679, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: m_Name
+      value: cabeza mesh collider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
