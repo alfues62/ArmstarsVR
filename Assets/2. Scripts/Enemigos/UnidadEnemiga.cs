@@ -8,17 +8,12 @@ public class UnidadEnemiga : MonoBehaviour
 
     [Header("Referencias Visuales")]
     public Image imagenRenderer; // El componente Image de la UI o SpriteRenderer
-    
+
     // Variables de estado "En vivo" (Runtime)
     private int vidaActual;
 
     void Start()
     {
-        // Si hay datos asignados, configuramos al enemigo al inicio
-        if (datosBase != null)
-        {
-            ConfigurarEnemigo(datosBase);
-        }
     }
 
     // Método para "Inyectar" un enemigo en este cuerpo
@@ -58,7 +53,7 @@ public class UnidadEnemiga : MonoBehaviour
         // 1. CÁLCULO DE LA PRECISIÓN PONDERADA
         float azar1 = Random.Range(-datosBase.variabilidad, datosBase.variabilidad);
         float azar2 = Random.Range(-datosBase.variabilidad, datosBase.variabilidad);
-        float variacionReal = (azar1 + azar2) / 2f; 
+        float variacionReal = (azar1 + azar2) / 2f;
 
         float precisionFinal = datosBase.precisionBase + variacionReal;
         precisionFinal = Mathf.Clamp(precisionFinal, 0f, 1f);
@@ -72,8 +67,8 @@ public class UnidadEnemiga : MonoBehaviour
 
         // 4. EJECUTAR
         // Nota: El enemigo NO sabe cuánto se reducirá por defensa, así que solo logueamos lo que él envía.
-        Debug.Log($"{datosBase.nombreEnemigo} ataca con precisión del {(precisionFinal*100):F1}% y fuerza bruta de {dañoEnvio}.");
-        
+        Debug.Log($"{datosBase.nombreEnemigo} ataca con precisión del {(precisionFinal * 100):F1}% y fuerza bruta de {dañoEnvio}.");
+
         // CORRECCIÓN: Enviamos 'dañoEnvio' (que es el bruto), NO 'dañoFinal'
         JugadorStats.Instance.RecibirDaño(dañoEnvio);
     }

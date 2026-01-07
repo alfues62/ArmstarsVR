@@ -12,14 +12,16 @@ public class EnemyBeaten : MonoBehaviour
 
     public RagdollToggle ragdollscrip;
 
-    public void BeatEnemy() {
+    public void BeatEnemy()
+    {
         //Debug.Log("Me han derrotado!");
         ChangeFace(false);
         ragdollscrip.DoRagdoll();
         estrellasInconsciente.SetActive(true);
     }
 
-    private void ChangeFace(bool state) { //True = Despierto, False = Derrotado
+    private void ChangeFace(bool state)
+    { //True = Despierto, False = Derrotado
         if (state)
         {
             renderer.material = materialDespierto;

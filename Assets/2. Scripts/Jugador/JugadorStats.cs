@@ -9,8 +9,7 @@ public class JugadorStats : MonoBehaviour
     public int vidaMaxima = 100;
     public int ataqueBase = 15;
     public int resistencia = 15;
-    
-    // Estas son las variables que cambian durante la pelea
+
     [Header("Estado Actual (Read Only)")]
     [SerializeField] private int vidaActual; // SerializeField para verla en inspector pero protegerla
 
@@ -24,8 +23,14 @@ public class JugadorStats : MonoBehaviour
         // Al empezar la batalla, nos ponemos a tope de vida
         // (O aquí cargaríamos la vida que traías del mapa si fuera un RPG largo)
         vidaActual = vidaMaxima;
-        
-        // Actualizar la barra de vida de la UI aquí...
+    }
+    public void PrepararParaCombate()
+    {
+        // Copiamos la Stat Base (Vida Maxima) a la Stat de Partida (Vida Actual)
+        // Igual que hacemos con 'datosBase.vidaMax' en el enemigo.
+        vidaActual = vidaMaxima;
+
+        Debug.Log($"Jugador listo para el duelo. Vida restablecida a: {vidaActual}/{vidaMaxima}");
     }
 
     // --- MÉTODOS DE ACCIÓN ---
@@ -43,7 +48,7 @@ public class JugadorStats : MonoBehaviour
         vidaActual -= dañoFinal;
 
         Debug.Log($"Golpe recibido: {dañoBruto}. Mitigado por defensa: {resistencia}. Daño real sufrido: {dañoFinal}. Vida restante: {vidaActual}");
-        
+
 
         if (vidaActual <= 0)
         {
