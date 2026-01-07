@@ -53,8 +53,29 @@ public class UnidadEnemiga : MonoBehaviour
 
     public void Atacar()
     {
-        Debug.Log($"{datosBase.nombreEnemigo} ataca causando {datosBase.ataque} de daño!");
-        // Aquí conectaríamos con el jugador para quitarle vida
+        if (JugadorStats.Instance == null) return;
+
+        // 1. CÁLCULO DE LA PRECISIÓN PONDERADA
+        float azar1 = Random.Range(-datosBase.variabilidad, datosBase.variabilidad);
+        float azar2 = Random.Range(-datosBase.variabilidad, datosBase.variabilidad);
+        float variacionReal = (azar1 + azar2) / 2f; 
+
+        float precisionFinal = datosBase.precisionBase + variacionReal;
+        precisionFinal = Mathf.Clamp(precisionFinal, 0f, 1f);
+
+        // 2. CÁLCULO DEL DAÑO BRUTO (Float)
+        float dañoBrutoFloat = datosBase.ataque * precisionFinal;
+
+        // 3. CONVERSIÓN A INT (Redondeo)
+        // Necesitamos pasar un entero al jugador. RoundToInt redondea al más cercano.
+        int dañoEnvio = Mathf.RoundToInt(dañoBrutoFloat);
+
+        // 4. EJECUTAR
+        // Nota: El enemigo NO sabe cuánto se reducirá por defensa, así que solo logueamos lo que él envía.
+        Debug.Log($"{datosBase.nombreEnemigo} ataca con precisión del {(precisionFinal*100):F1}% y fuerza bruta de {dañoEnvio}.");
+        
+        // CORRECCIÓN: Enviamos 'dañoEnvio' (que es el bruto), NO 'dañoFinal'
+        JugadorStats.Instance.RecibirDaño(dañoEnvio);
     }
 
     private void Morir()

@@ -8,6 +8,7 @@ public class JugadorStats : MonoBehaviour
     [Header("Configuración Base")]
     public int vidaMaxima = 100;
     public int ataqueBase = 15;
+    public int resistencia = 15;
     
     // Estas son las variables que cambian durante la pelea
     [Header("Estado Actual (Read Only)")]
@@ -29,26 +30,25 @@ public class JugadorStats : MonoBehaviour
 
     // --- MÉTODOS DE ACCIÓN ---
 
-    public void RecibirDaño(int cantidad)
+    public void RecibirDaño(int dañoBruto)
     {
-        vidaActual -= cantidad;
-        Debug.Log($"¡Auch! Jugador recibe {cantidad} daño. Vida: {vidaActual}");
+        // 1. CÁLCULO DE LA REDUCCIÓN DE DAÑO
+        // Fórmula: Lo que pega el enemigo - Mi resistencia
+        int dañoFinal = dañoBruto - resistencia;
+
+        // 2. EL IMPORTANTE "CLAMP" (Protección)
+        dañoFinal = Mathf.Max(0, dañoFinal);
+
+        // 3. APLICAR EL DAÑO
+        vidaActual -= dañoFinal;
+
+        Debug.Log($"Golpe recibido: {dañoBruto}. Mitigado por defensa: {resistencia}. Daño real sufrido: {dañoFinal}. Vida restante: {vidaActual}");
         
-        // Actualizar UI...
 
         if (vidaActual <= 0)
         {
             Derrota();
         }
-    }
-
-    public void Curar(int cantidad)
-    {
-        vidaActual += cantidad;
-        if (vidaActual > vidaMaxima) vidaActual = vidaMaxima;
-        
-        Debug.Log($"Jugador se cura. Vida: {vidaActual}");
-        // Actualizar UI...
     }
 
     // Método para que el Manager o el Estado obtengan el daño del jugador
