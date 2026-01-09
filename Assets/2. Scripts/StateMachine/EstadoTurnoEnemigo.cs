@@ -3,44 +3,46 @@ using UnityEngine;
 public class EstadoTurnoEnemigo : EstadoDuelo
 {
     [Header("Configuración")]
-    public float esperaAntesDeAtacar = 1.5f;
+    public float esperaAntesDeAnimacion = 1.5f;
 
     public override void Entrar()
     {
-        Debug.Log("TURNO ENEMIGO: Preparando ataque...");
-        Invoke("EjecutarAtaque", esperaAntesDeAtacar);
+        Debug.Log("TURNO ENEMIGO: Pensando...");
+        // 1. Esperamos el tiempo de "tensión" antes de movernos
+        Invoke("OrdenDeAtacar", esperaAntesDeAnimacion);
     }
 
-    private void EjecutarAtaque()
+    private void OrdenDeAtacar()
     {
-        // Verificamos que sigamos en este estado (por si el juego se pausó o terminó)
+        // Seguridad: Si el juego se detuvo o cambió de estado, no hacemos nada
         if (manager.EstadoActual != this) return;
 
-        manager.enemigoActivo.Atacar();
+        Debug.Log("TURNO ENEMIGO: ¡Iniciando animación!");
 
-        // Si el jugador sigue vivo, gestionamos el pase de turno
-        if (manager.EstadoActual == this)
-        {
-            TerminarTurno();
-        }
+        // 2. Aquí SOLO activamos la animación. NO aplicamos daño todavía.
+        // Llamamos al método nuevo en UnidadEnemiga
+        manager.enemigoActivo.IniciarAnimacionAtaque();
     }
 
-    void TerminarTurno()
+    public void ConfirmarDañoYTerminar()
     {
+        Debug.Log("TURNO ENEMIGO: Golpe conectado. Finalizando turno.");
+
+        // Lógica de "Ping Pong" de turnos
         if (manager.jugadorEmpiezaLaRonda)
         {
-            // Jugador 1º, Enemigo 2º -> Fin de Ronda
+            // Jugador fue 1º -> Fin de Ronda
             manager.CambiarEstado(manager.estadoInicioRonda);
         }
         else
         {
-            // Enemigo 1º -> Turno Jugador
+            // Enemigo fue 1º -> Turno Jugador
             manager.CambiarEstado(manager.estadoTurnoJugador);
         }
     }
 
     public override void Salir()
     {
-        CancelInvoke(); // Seguridad
+        CancelInvoke();
     }
 }

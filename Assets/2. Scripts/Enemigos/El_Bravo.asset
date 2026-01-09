@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombreEnemigo: El bravo
   spriteEnemigo: {fileID: 0}
-  vidaMax: 800
-  fuerza: 80
-  resistencia: 50
-  precision: 40
+  vidaMax: 1
+  ataque: 1000
+  precisionBase: 0.7
+  variabilidad: 0.1
   descripcion: 

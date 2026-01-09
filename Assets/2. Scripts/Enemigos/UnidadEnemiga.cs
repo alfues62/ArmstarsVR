@@ -1,68 +1,83 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UnidadEnemiga : MonoBehaviour
 {
-    [Header("Datos Base")]
-    public DatosEnemigo datosBase;
-
     [Header("Referencias Visuales")]
-    public Image imagenRenderer; // O SpriteRenderer si es 3D puro
+    public Animator animator;   // Arrastra aquí el Animator
 
-    // Variables de estado "En vivo"
-    private int vidaActual;
+    [Header("Datos y Estado")]
+    public DatosEnemigo datos;  // La ficha de datos (ScriptableObject)
+    public int vidaActual;
 
-    // Método para "Inyectar" un enemigo en este cuerpo
+    // Inicialización llamada por Activador o Manager
     public void ConfigurarEnemigo(DatosEnemigo nuevosDatos)
     {
-        datosBase = nuevosDatos;
-
-        // Copiamos la vidaMax a una variable local para no dañar el ScriptableObject
-        vidaActual = datosBase.vidaMax;
-
-        // Actualizamos el gráfico
-        if (imagenRenderer != null && datosBase.spriteEnemigo != null)
+        datos = nuevosDatos;
+        if (datos != null)
         {
-            imagenRenderer.sprite = datosBase.spriteEnemigo;
+            vidaActual = datos.vidaMax;
+            Debug.Log($"[Enemigo] Aparece {datos.nombreEnemigo} ({vidaActual} HP).");
         }
-
-        Debug.Log($"[Enemigo] Aparece {datosBase.nombreEnemigo} ({vidaActual} HP).");
     }
 
     public void RecibirDaño(int cantidad)
     {
         vidaActual -= cantidad;
-        Debug.Log($"[Enemigo] Recibe {cantidad} daño. Vida: {vidaActual}");
+        Debug.Log($"{gameObject.name} recibió {cantidad} de daño. Vida restante: {vidaActual}");
 
         if (vidaActual <= 0)
         {
-            Morir();
+            //Si quieres aqui va la animacion de muerte o las estrellas como veas es cuando muere el enemigo
+            DueloManager.Instance.CambiarEstado(DueloManager.Instance.VictoriaEstado);
+        }
+        else
+        {
+            // Feedback visual de dolor
+            if (animator != null) animator.SetTrigger("Hit");
         }
     }
 
-    public void Atacar()
+    public void IniciarAnimacionAtaque()
     {
-        if (JugadorStats.Instance == null) return;
-
-        // 1. CÁLCULO DE LA PRECISIÓN (Variación aleatoria)
-        float azar1 = Random.Range(-datosBase.variabilidad, datosBase.variabilidad);
-        float azar2 = Random.Range(-datosBase.variabilidad, datosBase.variabilidad);
-        float variacionReal = (azar1 + azar2) / 2f; // Promedio para curva de campana suave
-
-        float precisionFinal = Mathf.Clamp(datosBase.precisionBase + variacionReal, 0f, 1f);
-
-        // 2. CÁLCULO DEL DAÑO
-        int dañoFinal = Mathf.RoundToInt(datosBase.ataque * precisionFinal);
-
-        // 3. EJECUTAR
-        Debug.Log($"[Enemigo] Ataca con fuerza {dañoFinal} (Precisión: {precisionFinal:P0})");
-        JugadorStats.Instance.RecibirDaño(dañoFinal);
+        if (animator != null)
+        {
+            //Esto llama a la animacion de ataque del enemigo.
+            // El daño se calculará cuando la animación llegue al frame del impacto.
+            animator.SetTrigger("Atacar");
+        }
+        else
+        {
+            Debug.LogWarning("No hay Animator asignado. Calculando daño directo.");
+            GolpeEnemigo();
+        }
     }
 
-    private void Morir()
+    // --- ATAQUE FASE 2: IMPACTO (Llamado por Animation Event) ---
+    // ESTA es la función que debes poner en el evento de la animación
+    public void GolpeEnemigo()
     {
-        Debug.Log($"[Enemigo] {datosBase.nombreEnemigo} derrotado.");
-        // Avisamos al Manager DIRECTAMENTE para cambiar de estado
-        DueloManager.Instance.CambiarEstado(DueloManager.Instance.VictoriaEstado);
+        if (JugadorStats.Instance == null || datos == null) return;
+
+
+        // 1. CÁLCULO DE LA PRECISIÓN (Curva de campana / Promedio de dos randoms)
+        float azar1 = Random.Range(-datos.variabilidad, datos.variabilidad);
+        float azar2 = Random.Range(-datos.variabilidad, datos.variabilidad);
+        float variacionReal = (azar1 + azar2) / 2f;
+
+        float precisionFinal = Mathf.Clamp(datos.precisionBase + variacionReal, 0f, 1f);
+
+        // 2. CÁLCULO DEL DAÑO FINAL
+        int dañoFinal = Mathf.RoundToInt(datos.ataque * precisionFinal);
+
+        Debug.Log($"[Enemigo] Impacto calculado: Daño {dañoFinal} (Precisión: {precisionFinal:P0})");
+
+        // 3. APLICAR DAÑO AL JUGADOR
+        JugadorStats.Instance.RecibirDaño(dañoFinal);
+
+        // 4. AVISAR AL MANAGER (Fin de turno)
+        if (DueloManager.Instance.EstadoActual is EstadoTurnoEnemigo estado)
+        {
+            estado.ConfirmarDañoYTerminar();
+        }
     }
 }
