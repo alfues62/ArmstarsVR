@@ -2,18 +2,22 @@ using UnityEngine;
 
 public class EstadoTurnoJugador : EstadoDuelo
 {
+    public GameObject enemigo_col;
     public DetectorDeGolpes detectorEnemigo;
     public override void Entrar()
     {
         Debug.Log("--- TU TURNO: ¡Golpea! ---");
 
         detectorEnemigo.PrepararNuevoTurno();
+        enemigo_col.GetComponent<Rigidbody>().isKinematic = false;
+        enemigo_col.GetComponent<Rigidbody>().linearVelocity = new Vector3 (0f,0f,0f);
+        enemigo_col.transform.localPosition = new Vector3 (0.23f, 0.34f, 0.25f);
     }
 
-    public override void Actualizar()
+    public void Update()
     {
         // Preguntamos constantemente: "¿Ya te han pegado?"
-        if (detectorEnemigo != null)
+        if (detectorEnemigo.golpeRegistrado != false)
         {
             // Creamos variables vacías para recibir los datos
             float vel;
@@ -23,6 +27,7 @@ public class EstadoTurnoJugador : EstadoDuelo
             if (detectorEnemigo.IntentarObtenerGolpe(out vel, out pos))
             {
                 ProcesarAtaque(vel, pos);
+                enemigo_col.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
     }

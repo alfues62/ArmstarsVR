@@ -3,7 +3,7 @@ using UnityEngine;
 public class DetectorDeGolpes : MonoBehaviour
 {
     // Variables para guardar la "foto" del primer golpe
-    private bool golpeRegistrado = false;
+    public bool golpeRegistrado = false;
     private float velocidadGuardada;
     private Vector3 puntoLocalGuardado;
 
@@ -21,7 +21,7 @@ public class DetectorDeGolpes : MonoBehaviour
         Debug.Log($"[DetectorDeGolpes] Golpe detectado con velocidad {velocidadGuardada} en punto local {puntoLocalGuardado}");
         // --- BLOQUEO ---
         // Cerramos la puerta para que no entren más datos hasta que reiniciemos
-        golpeRegistrado = true;
+        golpeRegistrado = false;
     }
 
     // 2. FUNCIÓN PARA QUE EL MANAGER PIDA LOS DATOS

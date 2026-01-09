@@ -6,6 +6,7 @@ public class DueloManager : MonoBehaviour
     [Header("Referencias de Combate")]
     public UnidadEnemiga enemigoActivo;
     public JugadorStats jugador;
+    public DatosEnemigo enemigo;
     [HideInInspector] public bool jugadorEmpiezaLaRonda;
 
     [Header("Los Cassettes (Estados)")]
@@ -36,11 +37,15 @@ public class DueloManager : MonoBehaviour
 
     void Update()
     {
-        if (!dueloIniciado) return;
-        if (estadoActual != null) estadoActual.Actualizar();
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log("¿L?");
+            PrepararYComenzarDuelo(enemigoActivo, enemigo);
+        }
     }
     public void PrepararYComenzarDuelo(UnidadEnemiga cuerpoFisico, DatosEnemigo fichaDatos)
     {
+        Debug.Log("fUNCIOA?");
         // 1. INYECTAMOS LA FICHA EN EL CUERPO
         cuerpoFisico.ConfigurarEnemigo(fichaDatos);
 
