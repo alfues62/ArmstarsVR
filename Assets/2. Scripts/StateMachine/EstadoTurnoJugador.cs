@@ -2,21 +2,39 @@ using UnityEngine;
 
 public class EstadoTurnoJugador : EstadoDuelo
 {
+    public DetectorDeGolpes detectorEnemigo;
     public override void Entrar()
     {
-        Debug.Log("--- TU TURNO (Pulsa ESPACIO para atacar) ---");
-        // Aquí habilitarías los botones de la UI (SetInteractable true)
+        Debug.Log("--- TU TURNO: ¡Golpea! ---");
+
+        detectorEnemigo.PrepararNuevoTurno();
     }
 
     public override void Actualizar()
     {
-        // Lógica temporal: Usamos ESPACIO para simular el botón de "Atacar"
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Preguntamos constantemente: "¿Ya te han pegado?"
+        if (detectorEnemigo != null)
         {
-            RealizarAtaque();
+            // Creamos variables vacías para recibir los datos
+            float vel;
+            Vector3 pos;
+
+            // Si IntentarObtenerGolpe devuelve TRUE, es que ya tenemos el primer valor
+            if (detectorEnemigo.IntentarObtenerGolpe(out vel, out pos))
+            {
+                ProcesarAtaque(vel, pos);
+            }
         }
     }
+    void ProcesarAtaque(float velocidad, Vector3 posicion)
+    {
+        Debug.Log($"¡GOLPE PROCESADO! Vel: {velocidad} | Pos: {posicion}");
 
+        // ... Aquí va tu lógica de daño ...
+
+        // Importante: Cambiamos de estado para dejar de preguntar
+        manager.CambiarEstado(manager.estadoTurnoEnemigo);
+    }
     void RealizarAtaque()
     {
         // 1. CALCULAMOS Y APLICAMOS DAÑO
