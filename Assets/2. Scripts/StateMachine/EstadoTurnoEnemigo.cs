@@ -2,36 +2,45 @@ using UnityEngine;
 
 public class EstadoTurnoEnemigo : EstadoDuelo
 {
+    [Header("Configuración")]
+    public float esperaAntesDeAtacar = 1.5f;
+
     public override void Entrar()
     {
-        Debug.Log(">>> Iniciando Turno del Enemigo...");
-        Invoke("EjecutarAccion", 1.5f);
+        Debug.Log("TURNO ENEMIGO: Preparando ataque...");
+        Invoke("EjecutarAtaque", esperaAntesDeAtacar);
     }
 
-    private void EjecutarAccion()
+    private void EjecutarAtaque()
     {
-        // 1. El ataque
+        // Verificamos que sigamos en este estado (por si el juego se pausó o terminó)
+        if (manager.EstadoActual != this) return;
+
         manager.enemigoActivo.Atacar();
 
-        // 2. Seguridad: Si el juego terminó (GameOver/Victoria), paramos aquí.
-        if (manager.getEstadoActual() != manager.estadoTurnoEnemigo) return;
+        // Si el jugador sigue vivo, gestionamos el pase de turno
+        if (manager.EstadoActual == this)
+        {
+            TerminarTurno();
+        }
+    }
 
-        // 3. DECISIÓN DE TRÁFICO
-        // ¿Quién empezó esta ronda?
+    void TerminarTurno()
+    {
         if (manager.jugadorEmpiezaLaRonda)
         {
-            // CASO A: El orden fue Jugador -> Enemigo.
-            // Como yo (Enemigo) soy el segundo, la ronda ha terminado.
-            Debug.Log("Fin de la ronda. Volviendo al inicio.");
+            // Jugador 1º, Enemigo 2º -> Fin de Ronda
             manager.CambiarEstado(manager.estadoInicioRonda);
         }
         else
         {
-            // CASO B: El orden fue Enemigo -> Jugador.
-            // Como yo (Enemigo) fui el primero, ahora le toca al Jugador.
-            Debug.Log("Paso el turno al Jugador.");
+            // Enemigo 1º -> Turno Jugador
             manager.CambiarEstado(manager.estadoTurnoJugador);
         }
     }
-}
 
+    public override void Salir()
+    {
+        CancelInvoke(); // Seguridad
+    }
+}

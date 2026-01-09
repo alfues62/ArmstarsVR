@@ -2,52 +2,50 @@ using UnityEngine;
 
 public class DetectorDeGolpes : MonoBehaviour
 {
-    // Variables para guardar la "foto" del primer golpe
+    // El "candado" que asegura un solo golpe por turno
     public bool golpeRegistrado = false;
+
     private float velocidadGuardada;
     private Vector3 puntoLocalGuardado;
 
-    // 1. ESTA ES LA FUNCIÓN QUE DETECTA EL GOLPE (Automática)
     void OnCollisionEnter(Collision collision)
     {
-        // Si ya tenemos un golpe guardado en este turno, ignoramos los siguientes rebotes
+        // 1. Si el candado está cerrado, ignoramos rebotes
         if (golpeRegistrado) return;
 
-        // --- CAPTURA DE DATOS ---
+        // 2. Capturamos los datos del impacto
         velocidadGuardada = collision.relativeVelocity.magnitude;
-
         Vector3 puntoImpactoGlobal = collision.contacts[0].point;
+
+        // Convertimos a local por si queremos detectar puntos débiles relativos al enemigo
         puntoLocalGuardado = transform.InverseTransformPoint(puntoImpactoGlobal);
-        Debug.Log($"[DetectorDeGolpes] Golpe detectado con velocidad {velocidadGuardada} en punto local {puntoLocalGuardado}");
-        // --- BLOQUEO ---
-        // Cerramos la puerta para que no entren más datos hasta que reiniciemos
-        golpeRegistrado = false;
+
+        Debug.Log($"[Detector] ¡IMPACTO! Vel: {velocidadGuardada:F1}");
+
+        // 3. CERRAMOS EL CANDADO (Vital para evitar doble daño)
+        golpeRegistrado = true;
     }
 
-    // 2. FUNCIÓN PARA QUE EL MANAGER PIDA LOS DATOS
-    // Devuelve true si hay un golpe guardado, y saca los datos por las variables 'out'
+    // El EstadoTurnoJugador llamará a esto
     public bool IntentarObtenerGolpe(out float velocidad, out Vector3 puntoLocal)
     {
         if (golpeRegistrado)
         {
             velocidad = velocidadGuardada;
             puntoLocal = puntoLocalGuardado;
-            return true; // "¡Tengo datos!"
+            return true;
         }
         else
         {
             velocidad = 0f;
             puntoLocal = Vector3.zero;
-            return false; // "Aún no me han pegado"
+            return false;
         }
     }
 
-    // 3. FUNCIÓN PARA REINICIAR EN EL SIGUIENTE TURNO
-    // Llamar a esto desde 'EstadoTurnoJugador.Entrar()'
+    // Se llama al iniciar el turno del jugador para permitir un nuevo golpe
     public void PrepararNuevoTurno()
     {
         golpeRegistrado = false;
-        velocidadGuardada = 0f;
-        puntoLocalGuardado = Vector3.zero;
     }
 }

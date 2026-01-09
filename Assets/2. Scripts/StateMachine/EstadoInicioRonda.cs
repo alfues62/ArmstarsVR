@@ -5,14 +5,14 @@ public class EstadoInicioRonda : EstadoDuelo
 {
     [Header("UI")]
     public Text textoRonda;
-    public float tiempoCartel = 2.0f;
+    public float duracionCartel = 2.0f;
 
     private int contadorRonda = 0;
 
     public override void Entrar()
     {
         contadorRonda++;
-        Debug.Log($"--- COMENZANDO RONDA {contadorRonda} ---");
+        Debug.Log($"--- INICIO RONDA {contadorRonda} ---");
 
         if (textoRonda != null)
         {
@@ -20,25 +20,22 @@ public class EstadoInicioRonda : EstadoDuelo
             textoRonda.text = "RONDA " + contadorRonda;
         }
 
-        // Esperar y lanzar el turno
-        Invoke("EmpezarCombate", tiempoCartel);
+        Invoke("DistribuirTurnos", duracionCartel);
     }
 
-    void EmpezarCombate()
+    void DistribuirTurnos()
     {
         if (textoRonda != null) textoRonda.gameObject.SetActive(false);
 
-        // AQUÍ ESTÁ LA CLAVE:
-        // No decidimos al azar ahora, sino que miramos qué se decidió al inicio.
+        // Redirigimos según quién ganó el sorteo inicial
         if (manager.jugadorEmpiezaLaRonda)
-        {
-            // Caso A: Jugador -> Enemigo
             manager.CambiarEstado(manager.estadoTurnoJugador);
-        }
         else
-        {
-            // Caso B: Enemigo -> Jugador
             manager.CambiarEstado(manager.estadoTurnoEnemigo);
-        }
+    }
+
+    public override void Salir()
+    {
+        CancelInvoke();
     }
 }

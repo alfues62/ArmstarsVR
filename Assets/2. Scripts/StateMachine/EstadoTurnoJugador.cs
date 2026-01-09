@@ -2,83 +2,91 @@ using UnityEngine;
 
 public class EstadoTurnoJugador : EstadoDuelo
 {
-    public GameObject enemigo_col;
-    public DetectorDeGolpes detectorEnemigo;
+    [Header("Referencias Físicas")]
+    public GameObject enemigoColisionador;   // El objeto físico del enemigo
+    public DetectorDeGolpes detectorEnemigo; // El script del sensor
+
+    [Header("Configuración")]
+    public Vector3 posicionGuardia = new Vector3(0.23f, 0.34f, 0.25f);
+
+    private bool procesandoGolpe = false;
+
     public override void Entrar()
     {
-        Debug.Log("--- TU TURNO: ¡Golpea! ---");
+        procesandoGolpe = false;
 
-        detectorEnemigo.PrepararNuevoTurno();
-        enemigo_col.GetComponent<Rigidbody>().isKinematic = false;
-        enemigo_col.GetComponent<Rigidbody>().linearVelocity = new Vector3 (0f,0f,0f);
-        enemigo_col.transform.localPosition = new Vector3 (0.23f, 0.34f, 0.25f);
+        // 1. Preparamos el detector
+        if (detectorEnemigo != null) detectorEnemigo.PrepararNuevoTurno();
+
+        // 2. Reseteamos físicas del enemigo (evitar que se mueva solo)
+        if (enemigoColisionador != null)
+        {
+            Rigidbody rb = enemigoColisionador.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+            // Colocamos al enemigo en posición para recibir el golpe
+            enemigoColisionador.transform.localPosition = posicionGuardia;
+        }
+
+        Debug.Log("TURNO JUGADOR: ¡Tienes 1 golpe!");
     }
 
-    public void Update()
+    public override void Actualizar()
     {
-        // Preguntamos constantemente: "¿Ya te han pegado?"
-        if (detectorEnemigo.golpeRegistrado != false)
-        {
-            // Creamos variables vacías para recibir los datos
-            float vel;
-            Vector3 pos;
+        // Si ya golpeamos, no hacemos nada más hasta que cambie el estado
+        if (procesandoGolpe) return;
 
-            // Si IntentarObtenerGolpe devuelve TRUE, es que ya tenemos el primer valor
-            if (detectorEnemigo.IntentarObtenerGolpe(out vel, out pos))
+        if (detectorEnemigo != null && detectorEnemigo.golpeRegistrado)
+        {
+            if (detectorEnemigo.IntentarObtenerGolpe(out float velocidad, out Vector3 posicion))
             {
-                ProcesarAtaque(vel, pos);
-                enemigo_col.GetComponent<Rigidbody>().isKinematic = true;
+                // CRÍTICO: Bloqueamos inmediatamente para asegurar que sea SOLO UN HIT
+                procesandoGolpe = true;
+
+                CongelarEnemigo(); // Opcional: feedback visual
+                ProcesarGolpe(velocidad);
             }
         }
     }
-    void ProcesarAtaque(float velocidad, Vector3 posicion)
+
+    void CongelarEnemigo()
     {
-        Debug.Log($"¡GOLPE PROCESADO! Vel: {velocidad} | Pos: {posicion}");
-
-        // ... Aquí va tu lógica de daño ...
-
-        // Importante: Cambiamos de estado para dejar de preguntar
-        manager.CambiarEstado(manager.estadoTurnoEnemigo);
+        Rigidbody rb = enemigoColisionador.GetComponent<Rigidbody>();
+        if (rb != null) rb.isKinematic = true;
     }
-    void RealizarAtaque()
+
+    void ProcesarGolpe(float velocidad)
     {
-        // 1. CALCULAMOS Y APLICAMOS DAÑO
-        // Obtenemos cuánto pega el jugador
-        int daño = JugadorStats.Instance.ataqueBase;
+        // Cálculo de daño
+        int dañoBase = JugadorStats.Instance.ataqueBase;
+        int dañoTotal = Mathf.RoundToInt(velocidad * 2.0f) + dañoBase;
 
-        Debug.Log($"Jugador ataca causando {daño} puntos.");
+        // Aplicar daño
+        manager.enemigoActivo.RecibirDaño(dañoTotal);
 
-        // Se lo aplicamos al enemigo actual
-        manager.enemigoActivo.RecibirDaño(daño);
+        // Si el enemigo no murió (el estado sigue siendo este), pasamos turno.
+        if (manager.EstadoActual == this)
+        {
+            Invoke("TerminarTurno", 0.5f); // Pequeño delay para ver el impacto
+        }
+    }
 
-
-        // 2. SEGURIDAD (Critical Check)
-        // Si el enemigo muere, 'RecibirDaño' cambiará el estado a 'VictoriaEstado'.
-        // Si eso pasa, NO debemos intentar cambiar de turno aquí.
-        if (manager.getEstadoActual() != manager.estadoTurnoJugador) return;
-
-
-        // 3. DECISIÓN DE TRÁFICO (Lógica Espejo)
-        // Consultamos la variable que definimos en el Manager
+    void TerminarTurno()
+    {
+        // Lógica de "Ping Pong"
         if (manager.jugadorEmpiezaLaRonda)
         {
-            // CASO A: El Jugador fue PRIMERO.
-            // Todavía falta que pegue el enemigo.
-            Debug.Log("Fin de mi turno -> Va el Enemigo.");
+            // Jugador fue 1º -> Ahora va el Enemigo
             manager.CambiarEstado(manager.estadoTurnoEnemigo);
         }
         else
         {
-            // CASO B: El Jugador fue SEGUNDO (El enemigo ya pegó antes).
-            // La ronda ha terminado.
-            Debug.Log("Fin de la ronda -> Volvemos al inicio.");
+            // Jugador fue 2º -> Se acabó la ronda, volvemos al inicio
             manager.CambiarEstado(manager.estadoInicioRonda);
         }
-    }
-
-    public override void Salir()
-    {
-        // Aquí deshabilitarías los botones para que no se pueda pulsar dos veces
-        Debug.Log("Terminando turno jugador...");
     }
 }

@@ -1,27 +1,20 @@
 using UnityEngine;
 
-public class EstadoDerrota : EstadoDuelo // <--- IMPORTANTE: Heredar de EstadoDuelo
+public class EstadoDerrota : EstadoDuelo
 {
-    [Header("Configuración UI")]
-    public GameObject panelDerrota; // Arrastra tu Panel de "GAME OVER" aquí
-    public float tiempoEnPantalla = 4.0f; // Quizás quieras dejar este cartel más tiempo
+    public GameObject panelDerrota;
+    public float tiempoEnPantalla = 3.0f;
 
     public override void Entrar()
     {
-        Debug.Log("--- DERROTA ---");
-
-        // 1. Mostrar la UI
+        Debug.Log("--- Derrota ---");
         if (panelDerrota != null) panelDerrota.SetActive(true);
-
-        // 2. Programar la salida
-        Invoke("VolverAlInicio", tiempoEnPantalla);
+        Invoke("Cerrar", tiempoEnPantalla);
     }
 
-    void VolverAlInicio()
+    void Cerrar()
     {
         if (panelDerrota != null) panelDerrota.SetActive(false);
-
-        // Cerramos el combate igual que en la victoria
         manager.FinalizarCombate();
     }
 }

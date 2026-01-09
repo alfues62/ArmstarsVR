@@ -1,44 +1,38 @@
 using UnityEngine;
-using UnityEngine.UI; // Si vas a mostrar la vida en una barra
+using UnityEngine.UI;
 
 public class UnidadEnemiga : MonoBehaviour
 {
-    [Header("Arrastra aquí el archivo del enemigo")]
-    public DatosEnemigo datosBase; // Aquí arrastras tu "Goblin" o "Dragon"
+    [Header("Datos Base")]
+    public DatosEnemigo datosBase;
 
     [Header("Referencias Visuales")]
-    public Image imagenRenderer; // El componente Image de la UI o SpriteRenderer
+    public Image imagenRenderer; // O SpriteRenderer si es 3D puro
 
-    // Variables de estado "En vivo" (Runtime)
+    // Variables de estado "En vivo"
     private int vidaActual;
-
-    void Start()
-    {
-    }
 
     // Método para "Inyectar" un enemigo en este cuerpo
     public void ConfigurarEnemigo(DatosEnemigo nuevosDatos)
     {
         datosBase = nuevosDatos;
 
-        // IMPORTANTE: Copiamos la vidaMax a una variable local.
-        // Nunca modifiques 'datosBase.vidaMax' directamente en combate,
-        // o el archivo se quedará guardado con la vida bajada para siempre.
+        // Copiamos la vidaMax a una variable local para no dañar el ScriptableObject
         vidaActual = datosBase.vidaMax;
 
-        // Cambiamos el gráfico
+        // Actualizamos el gráfico
         if (imagenRenderer != null && datosBase.spriteEnemigo != null)
         {
             imagenRenderer.sprite = datosBase.spriteEnemigo;
         }
 
-        Debug.Log($"Ha aparecido un {datosBase.nombreEnemigo} con {vidaActual} HP.");
+        Debug.Log($"[Enemigo] Aparece {datosBase.nombreEnemigo} ({vidaActual} HP).");
     }
 
     public void RecibirDaño(int cantidad)
     {
         vidaActual -= cantidad;
-        Debug.Log($"{datosBase.nombreEnemigo} recibe {cantidad} de daño. Vida restante: {vidaActual}");
+        Debug.Log($"[Enemigo] Recibe {cantidad} daño. Vida: {vidaActual}");
 
         if (vidaActual <= 0)
         {
@@ -50,33 +44,25 @@ public class UnidadEnemiga : MonoBehaviour
     {
         if (JugadorStats.Instance == null) return;
 
-        // 1. CÁLCULO DE LA PRECISIÓN PONDERADA
+        // 1. CÁLCULO DE LA PRECISIÓN (Variación aleatoria)
         float azar1 = Random.Range(-datosBase.variabilidad, datosBase.variabilidad);
         float azar2 = Random.Range(-datosBase.variabilidad, datosBase.variabilidad);
-        float variacionReal = (azar1 + azar2) / 2f;
+        float variacionReal = (azar1 + azar2) / 2f; // Promedio para curva de campana suave
 
-        float precisionFinal = datosBase.precisionBase + variacionReal;
-        precisionFinal = Mathf.Clamp(precisionFinal, 0f, 1f);
+        float precisionFinal = Mathf.Clamp(datosBase.precisionBase + variacionReal, 0f, 1f);
 
-        // 2. CÁLCULO DEL DAÑO BRUTO (Float)
-        float dañoBrutoFloat = datosBase.ataque * precisionFinal;
+        // 2. CÁLCULO DEL DAÑO
+        int dañoFinal = Mathf.RoundToInt(datosBase.ataque * precisionFinal);
 
-        // 3. CONVERSIÓN A INT (Redondeo)
-        // Necesitamos pasar un entero al jugador. RoundToInt redondea al más cercano.
-        int dañoEnvio = Mathf.RoundToInt(dañoBrutoFloat);
-
-        // 4. EJECUTAR
-        // Nota: El enemigo NO sabe cuánto se reducirá por defensa, así que solo logueamos lo que él envía.
-        Debug.Log($"{datosBase.nombreEnemigo} ataca con precisión del {(precisionFinal * 100):F1}% y fuerza bruta de {dañoEnvio}.");
-
-        // CORRECCIÓN: Enviamos 'dañoEnvio' (que es el bruto), NO 'dañoFinal'
-        JugadorStats.Instance.RecibirDaño(dañoEnvio);
+        // 3. EJECUTAR
+        Debug.Log($"[Enemigo] Ataca con fuerza {dañoFinal} (Precisión: {precisionFinal:P0})");
+        JugadorStats.Instance.RecibirDaño(dañoFinal);
     }
 
     private void Morir()
     {
-        Debug.Log($"{datosBase.nombreEnemigo} ha sido derrotado.");
-        // Avisar al DueloManager de que ganamos
+        Debug.Log($"[Enemigo] {datosBase.nombreEnemigo} derrotado.");
+        // Avisamos al Manager DIRECTAMENTE para cambiar de estado
         DueloManager.Instance.CambiarEstado(DueloManager.Instance.VictoriaEstado);
     }
 }
