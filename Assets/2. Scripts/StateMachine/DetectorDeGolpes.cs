@@ -18,7 +18,7 @@ public class DetectorDeGolpes : MonoBehaviour
 
         Vector3 puntoImpactoGlobal = collision.contacts[0].point;
         puntoLocalGuardado = transform.InverseTransformPoint(puntoImpactoGlobal);
-
+        Debug.Log($"[DetectorDeGolpes] Golpe detectado con velocidad {velocidadGuardada} en punto local {puntoLocalGuardado}");
         // --- BLOQUEO ---
         // Cerramos la puerta para que no entren más datos hasta que reiniciemos
         golpeRegistrado = true;
