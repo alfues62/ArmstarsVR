@@ -3,7 +3,7 @@ using UnityEngine;
 public class UnidadEnemiga : MonoBehaviour
 {
     [Header("Referencias Visuales")]
-    public Animator animator;   // Arrastra aquí el Animator
+    public Animator animator;
 
     [Header("Datos y Estado")]
     public DatosEnemigo datos;  // La ficha de datos (ScriptableObject)
@@ -43,7 +43,8 @@ public class UnidadEnemiga : MonoBehaviour
         {
             //Esto llama a la animacion de ataque del enemigo.
             // El daño se calculará cuando la animación llegue al frame del impacto.
-            animator.SetTrigger("Atacar");
+            animator.SetTrigger("slapAnimTrigger");
+            GolpeEnemigo();
         }
         else
         {

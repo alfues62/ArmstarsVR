@@ -8,6 +8,7 @@ public class EstadoTurnoJugador : EstadoDuelo
 
     [Header("Configuración")]
     public Vector3 posicionGuardia = new Vector3(0.23f, 0.34f, 0.25f);
+    public Vector3 rotacionGuardia = new Vector3(90f, 41f, 0f);
 
     private bool procesandoGolpe = false;
 
@@ -30,6 +31,7 @@ public class EstadoTurnoJugador : EstadoDuelo
             }
             // Colocamos al enemigo en posición para recibir el golpe
             enemigoColisionador.transform.localPosition = posicionGuardia;
+            enemigoColisionador.transform.localEulerAngles = rotacionGuardia;
         }
 
         Debug.Log("TURNO JUGADOR: ¡Tienes 1 golpe!");

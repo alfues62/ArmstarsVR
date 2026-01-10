@@ -3,7 +3,7 @@ using UnityEngine;
 public class EstadoDerrota : EstadoDuelo
 {
     public GameObject panelDerrota;
-    public float tiempoEnPantalla = 3.0f;
+    public float tiempoEnPantalla = 4.0f;
 
     public override void Entrar()
     {

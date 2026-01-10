@@ -6,26 +6,42 @@ public class RagdollToggle : MonoBehaviour
 {
 
     private Rigidbody[] rigidbodies;
+    public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rigidbodies = transform.GetComponentsInChildren<Rigidbody>();
         ToggleRagdoll(false);
+        animator.enabled = true;
     }
 
     void ToggleRagdoll(bool enabled) //True = Ragdoll, False = No Ragdoll
     {
-        bool isKinematic = !enabled;
         foreach (Rigidbody rigidbody in rigidbodies)
         {
-            rigidbody.isKinematic = isKinematic;
+            animator.enabled = !enabled;
+            rigidbody.isKinematic = !enabled;
         }
 
     }
 
     public void DoRagdoll() {
         ToggleRagdoll(true);
+    }
+
+    public void UnDoRagdoll()
+    {
+        ToggleRagdoll(false);
+        animator.Play("idle");
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            UnDoRagdoll();
+        }
     }
 
 }

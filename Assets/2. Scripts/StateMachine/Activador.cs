@@ -4,6 +4,7 @@ public class Activador : MonoBehaviour
 {
     [Header("Configuración de Prueba")]
     public UnidadEnemiga cuerpoEnEscena;
+    public EnemyBeaten scriptBeaten;
     public DatosEnemigo fichaDeDatos;
 
     private bool enemigoCargado = false;
@@ -16,6 +17,7 @@ public class Activador : MonoBehaviour
             if (cuerpoEnEscena != null && fichaDeDatos != null)
             {
                 cuerpoEnEscena.gameObject.SetActive(true);
+                scriptBeaten.UnBeatEnemy();
                 cuerpoEnEscena.ConfigurarEnemigo(fichaDeDatos);
                 enemigoCargado = true;
                 Debug.Log("[Activador] Enemigo cargado. Pulsa 'L' para iniciar combate.");

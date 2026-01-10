@@ -20,6 +20,13 @@ public class EnemyBeaten : MonoBehaviour
         estrellasInconsciente.SetActive(true);
     }
 
+    public void UnBeatEnemy()
+    {
+        ChangeFace(true);
+        ragdollscrip.UnDoRagdoll();
+        estrellasInconsciente.SetActive(false);
+    }
+
     private void ChangeFace(bool state)
     { //True = Despierto, False = Derrotado
         if (state)
@@ -37,6 +44,10 @@ public class EnemyBeaten : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B))
         {
             BeatEnemy();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            UnBeatEnemy();
         }
     }
 }
