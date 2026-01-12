@@ -9,32 +9,41 @@ public class Activador : MonoBehaviour
 
     private bool enemigoCargado = false;
 
+    // --- NUEVA FUNCIÓN PARA LA UI ---
+    public void CargarEnemigoDesdeUI(DatosEnemigo nuevaFicha)
+    {
+        fichaDeDatos = nuevaFicha; // Guardamos la ficha que viene del botón
+        
+        if (cuerpoEnEscena != null && fichaDeDatos != null)
+        {
+            cuerpoEnEscena.gameObject.SetActive(true);
+            scriptBeaten.UnBeatEnemy();
+            cuerpoEnEscena.ConfigurarEnemigo(fichaDeDatos);
+            enemigoCargado = true;
+            Debug.Log($"[Activador] {fichaDeDatos.nombreEnemigo} cargado desde UI. Pulsa 'L' para luchar.");
+        }
+    }
+
     void Update()
     {
-        // TECLA K: Carga visual
+        // TECLA K: Sigue funcionando por si quieres probar manual
         if (Input.GetKeyDown(KeyCode.K))
         {
-            if (cuerpoEnEscena != null && fichaDeDatos != null)
-            {
-                cuerpoEnEscena.gameObject.SetActive(true);
-                scriptBeaten.UnBeatEnemy();
-                cuerpoEnEscena.ConfigurarEnemigo(fichaDeDatos);
-                enemigoCargado = true;
-                Debug.Log("[Activador] Enemigo cargado. Pulsa 'L' para iniciar combate.");
-            }
+            CargarEnemigoDesdeUI(fichaDeDatos);
         }
 
-        // TECLA L: Inicio Lógico
+        // TECLA L: Inicio Lógico (Sigue igual que antes)
         if (Input.GetKeyDown(KeyCode.L))
         {
             if (enemigoCargado && DueloManager.Instance != null)
             {
                 DueloManager.Instance.PrepararYComenzarDuelo(cuerpoEnEscena, fichaDeDatos);
-                enemigoCargado = false; // Bloquear reinicio accidental
+                enemigoCargado = false; 
+                Debug.Log("[Activador] ¡Duelo Iniciado!");
             }
             else
             {
-                Debug.LogWarning("[Activador] Pulsa 'K' primero para cargar al enemigo.");
+                Debug.LogWarning("[Activador] Primero elige un enemigo en la UI.");
             }
         }
     }

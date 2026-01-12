@@ -1,45 +1,35 @@
 using UnityEngine;
-using UnityEngine.UI; // Necesario para tocar la imagen del botón
+using UnityEngine.UI;
 
 public class BotonEnemigo : MonoBehaviour
 {
-    [Header("1. ¿Quién es este enemigo? (La Ficha)")]
-    public DatosEnemigo fichaDeEsteBoton; // Aquí arrastras "El_Bravo.asset"
+    [Header("Ficha de este enemigo")]
+    public DatosEnemigo fichaDeEsteBoton;
 
-    [Header("2. ¿Dónde va a aparecer? (El Cuerpo)")]
-    public UnidadEnemiga contenedorFisico; // Arrastra aquí al enemigo de la escena (aunque esté oculto)
-
-    [Header("Opcional: Auto-Configurar Imagen")]
-    public Image imagenDelBoton; // Arrastra el componente Image de este mismo botón
+    [Header("Referencias")]
+    public Activador scriptActivador; // Arrastra aquÃ­ el objeto que tiene el script Activador
+    public Image imagenDelBoton;
 
     void Start()
     {
-        // TRUCO PRO: Al iniciar, el botón se pone la foto del enemigo automáticamente
         if (fichaDeEsteBoton != null && imagenDelBoton != null)
         {
             imagenDelBoton.sprite = fichaDeEsteBoton.spriteEnemigo;
         }
     }
 
-    // Esta es la función que conectaremos al click
     public void LucharContraEste()
     {
-        if (fichaDeEsteBoton == null)
+        if (fichaDeEsteBoton == null || scriptActivador == null)
         {
-            Debug.LogError("¡Este botón no tiene ficha de enemigo asignada!");
+            Debug.LogError("Faltan datos o referencia al Activador en el botÃ³n.");
             return;
         }
 
-        Debug.Log("Has elegido luchar contra: " + fichaDeEsteBoton.nombreEnemigo);
+        // 1. Simulamos la tecla 'K' enviando los datos al activador
+        scriptActivador.CargarEnemigoDesdeUI(fichaDeEsteBoton);
 
-        // 1. Aseguramos que el cuerpo físico sea visible
-        contenedorFisico.gameObject.SetActive(true);
-
-        // 2. Llamamos a la función Maestra que creamos antes
-        DueloManager.Instance.PrepararYComenzarDuelo(contenedorFisico, fichaDeEsteBoton);
-
-        // 3. Ocultar el menú de selección (mejor usar el Canvas padre)
-        // Buscamos el Canvas raíz para apagar todo el menú de golpe
+        // 2. Cerramos el menÃº para que el jugador pueda pulsar 'L'
         Canvas canvasRaiz = GetComponentInParent<Canvas>();
         if (canvasRaiz != null) canvasRaiz.gameObject.SetActive(false);
     }
