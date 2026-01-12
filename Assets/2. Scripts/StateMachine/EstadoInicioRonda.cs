@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EstadoInicioRonda : EstadoDuelo
 {
     [Header("UI")]
-    public Text textoRonda;
-    public float duracionCartel = 2.0f;
+    public TextMeshProUGUI textoRonda;
+    public float duracionCartel = 3.0f;
 
     private int contadorRonda = 0;
 
