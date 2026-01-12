@@ -8,8 +8,10 @@ public class DueloManager : MonoBehaviour
     public UnidadEnemiga enemigoActivo;
     public JugadorStats jugador;
 
+    [Header("Configuración de Audio")]
+    public AudioSource musicaCombate; // Arrastra aquí el AudioSource con la música
+
     [Header("Configuración de Flujo")]
-    // Oculto para evitar manipulación manual, pero público para acceso lógico
     [HideInInspector] public bool jugadorEmpiezaLaRonda;
 
     [Header("Máquina de Estados")]
@@ -22,7 +24,6 @@ public class DueloManager : MonoBehaviour
     private EstadoDuelo estadoActual;
     private bool dueloIniciado = false;
 
-    // Propiedad pública de solo lectura
     public EstadoDuelo EstadoActual => estadoActual;
 
     void Awake()
@@ -31,6 +32,9 @@ public class DueloManager : MonoBehaviour
         else if (Instance != this) Destroy(gameObject);
 
         InicializarEstados();
+
+        // Intentar obtener el componente si no se asignó manualmente
+        if (musicaCombate == null) musicaCombate = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -54,7 +58,7 @@ public class DueloManager : MonoBehaviour
         jugador = JugadorStats.Instance;
 
         jugador.PrepararParaCombate();
-        InicializarEstados(); // Reiniciamos referencias en los estados
+        InicializarEstados();
 
         IniciarDuelo();
     }
@@ -63,7 +67,12 @@ public class DueloManager : MonoBehaviour
     {
         dueloIniciado = true;
 
-        // Sorteo 50/50
+        // --- INICIAR MÚSICA ---
+        if (musicaCombate != null)
+        {
+            musicaCombate.Play();
+        }
+
         jugadorEmpiezaLaRonda = (Random.value > 0.5f);
         Debug.Log(jugadorEmpiezaLaRonda ? ">>> Sorteo: Empieza JUGADOR" : ">>> Sorteo: Empieza ENEMIGO");
 
@@ -80,6 +89,13 @@ public class DueloManager : MonoBehaviour
     public void FinalizarCombate()
     {
         dueloIniciado = false;
+
+        // --- DETENER MÚSICA ---
+        if (musicaCombate != null)
+        {
+            musicaCombate.Stop();
+        }
+
         if (enemigoActivo != null) enemigoActivo.gameObject.SetActive(false);
         Debug.Log("--- Combate Finalizado ---");
     }
