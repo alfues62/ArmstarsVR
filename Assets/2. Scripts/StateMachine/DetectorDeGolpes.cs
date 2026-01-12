@@ -1,32 +1,73 @@
 using UnityEngine;
+using System.Collections; // NECESARIO para que funcionen las corrutinas
 
+[RequireComponent(typeof(AudioSource))]
 public class DetectorDeGolpes : MonoBehaviour
 {
-    // El "candado" que asegura un solo golpe por turno
     public bool golpeRegistrado = false;
+
+    [Header("Configuración de Sonido")]
+    public AudioSource audioSource;
+
+    [Header("Configuración de VFX")]
+    public GameObject vfxGolpe;      // Arrastra aquí el objeto del efecto (ej. una explosión o chispas)
+    public float duracionVFX = 1.0f; // Tiempo que estará visible
 
     private float velocidadGuardada;
     private Vector3 puntoLocalGuardado;
 
+    void Awake()
+    {
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        // 1. Si el candado está cerrado, ignoramos rebotes
+        // 1. Si ya se registró el golpe en este turno, no hacemos nada
         if (golpeRegistrado) return;
 
-        // 2. Capturamos los datos del impacto
+        // 2. Reproducir sonido
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.Play();
+        }
+
+        // 3. Capturar datos del impacto
         velocidadGuardada = collision.relativeVelocity.magnitude;
         Vector3 puntoImpactoGlobal = collision.contacts[0].point;
-
-        // Convertimos a local por si queremos detectar puntos débiles relativos al enemigo
         puntoLocalGuardado = transform.InverseTransformPoint(puntoImpactoGlobal);
 
-        Debug.Log($"[Detector] ¡IMPACTO! Vel: {velocidadGuardada:F1}");
+        // 4. ACTIVAR VFX (Si existe)
+        if (vfxGolpe != null)
+        {
+            StartCoroutine(ManejarVFX(puntoImpactoGlobal));
+        }
 
-        // 3. CERRAMOS EL CANDADO (Vital para evitar doble daño)
+        Debug.Log($"[Detector] ¡IMPACTO! Vel: {velocidadGuardada:F1}");
+        
+        // 5. Cerramos el candado del turno
         golpeRegistrado = true;
     }
 
-    // El EstadoTurnoJugador llamará a esto
+    // Lógica para mostrar y ocultar el efecto visual
+    private IEnumerator ManejarVFX(Vector3 posicion)
+    {
+        // Movemos el VFX al punto exacto del golpe
+        vfxGolpe.transform.position = posicion;
+        
+        // Lo activamos
+        vfxGolpe.SetActive(true);
+
+        // Esperamos el tiempo definido
+        yield return new WaitForSeconds(duracionVFX);
+
+        // Lo desactivamos
+        vfxGolpe.SetActive(false);
+    }
+
     public bool IntentarObtenerGolpe(out float velocidad, out Vector3 puntoLocal)
     {
         if (golpeRegistrado)
@@ -43,9 +84,10 @@ public class DetectorDeGolpes : MonoBehaviour
         }
     }
 
-    // Se llama al iniciar el turno del jugador para permitir un nuevo golpe
     public void PrepararNuevoTurno()
     {
         golpeRegistrado = false;
+        // Opcional: Nos aseguramos de que el VFX esté apagado al iniciar el turno
+        if (vfxGolpe != null) vfxGolpe.SetActive(false);
     }
 }
