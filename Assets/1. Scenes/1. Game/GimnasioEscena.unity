@@ -1083,6 +1083,7 @@ MonoBehaviour:
     m_Flags: 0
   objsToShowHide:
   - {fileID: 1922616768}
+  - {fileID: 1881337251}
   bShowWhilePressing: 1
 --- !u!4 &107892831
 Transform:
@@ -5068,7 +5069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8632,6 +8633,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1881337251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4551443063124472279, guid: 6f79d2ac2baa58342bb5ba60355ee6e7, type: 3}
+  m_PrefabInstance: {fileID: 1233825535}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1882436544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9060,7 +9066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1960461971
 MonoBehaviour:
   m_ObjectHideFlags: 0
