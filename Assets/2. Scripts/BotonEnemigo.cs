@@ -20,6 +20,8 @@ public class BotonEnemigo : MonoBehaviour
 
     public void LucharContraEste()
     {
+
+        Debug.Log("He clickado");
         if (fichaDeEsteBoton == null || scriptActivador == null)
         {
             Debug.LogError("Faltan datos o referencia al Activador en el botón.");

@@ -35,16 +35,21 @@ public class Activador : MonoBehaviour
         // TECLA L: Inicio Lógico (Sigue igual que antes)
         if (Input.GetKeyDown(KeyCode.L))
         {
-            if (enemigoCargado && DueloManager.Instance != null)
-            {
-                DueloManager.Instance.PrepararYComenzarDuelo(cuerpoEnEscena, fichaDeDatos);
-                enemigoCargado = false; 
-                Debug.Log("[Activador] ¡Duelo Iniciado!");
-            }
-            else
-            {
-                Debug.LogWarning("[Activador] Primero elige un enemigo en la UI.");
-            }
+            iniciarDueloActivador();
+        }
+    }
+
+    public void iniciarDueloActivador()
+    {
+        if (enemigoCargado && DueloManager.Instance != null)
+        {
+            DueloManager.Instance.PrepararYComenzarDuelo(cuerpoEnEscena, fichaDeDatos);
+            enemigoCargado = false;
+            Debug.Log("[Activador] ¡Duelo Iniciado!");
+        }
+        else
+        {
+            Debug.LogWarning("[Activador] Primero elige un enemigo en la UI.");
         }
     }
 }
