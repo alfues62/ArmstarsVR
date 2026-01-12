@@ -1,38 +1,49 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class DetectorDeGolpes : MonoBehaviour
 {
-    // El "candado" que asegura un solo golpe por turno
     public bool golpeRegistrado = false;
+
+    [Header("Configuración de Sonido")]
+    public AudioSource audioSource;
 
     private float velocidadGuardada;
     private Vector3 puntoLocalGuardado;
 
+    void Awake()
+    {
+        // Usamos Awake para asegurar que la referencia esté lista antes de cualquier colisión
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        // 1. Si el candado está cerrado, ignoramos rebotes
         if (golpeRegistrado) return;
 
-        // 2. Capturamos los datos del impacto
+        // Reproducir sonido
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.Play();
+        }
+
         velocidadGuardada = collision.relativeVelocity.magnitude;
         Vector3 puntoImpactoGlobal = collision.contacts[0].point;
-
-        // Convertimos a local por si queremos detectar puntos débiles relativos al enemigo
         puntoLocalGuardado = transform.InverseTransformPoint(puntoImpactoGlobal);
 
         Debug.Log($"[Detector] ¡IMPACTO! Vel: {velocidadGuardada:F1}");
-
-        // 3. CERRAMOS EL CANDADO (Vital para evitar doble daño)
         golpeRegistrado = true;
     }
 
-    // El EstadoTurnoJugador llamará a esto
     public bool IntentarObtenerGolpe(out float velocidad, out Vector3 puntoLocal)
     {
         if (golpeRegistrado)
         {
             velocidad = velocidadGuardada;
-            puntoLocal = puntoLocalGuardado;
+            puntoLocal = puntoLocalGuardado; // CORREGIDO: ahora coincide con el parámetro de salida
             return true;
         }
         else
@@ -43,7 +54,6 @@ public class DetectorDeGolpes : MonoBehaviour
         }
     }
 
-    // Se llama al iniciar el turno del jugador para permitir un nuevo golpe
     public void PrepararNuevoTurno()
     {
         golpeRegistrado = false;
