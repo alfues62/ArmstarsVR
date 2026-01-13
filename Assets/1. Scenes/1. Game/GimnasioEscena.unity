@@ -2911,6 +2911,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4998195212712139732, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 900750710}
+    - target: {fileID: 6836525513647540260, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 900750711}
     - target: {fileID: 8453054675035652621, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
       propertyPath: m_Name
       value: Enemigo_persona
@@ -2960,6 +2968,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+--- !u!54 &900750710 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 3100439868296883882, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+  m_PrefabInstance: {fileID: 900750709}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &900750711 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 7359417646478413261, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+  m_PrefabInstance: {fileID: 900750709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &911097042
 PrefabInstance:
   m_ObjectHideFlags: 0
