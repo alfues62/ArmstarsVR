@@ -1082,7 +1082,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   objsToShowHide:
-  - {fileID: 1922616768}
+  - {fileID: 1881337251}
   - {fileID: 1881337251}
   bShowWhilePressing: 1
 --- !u!4 &107892831
@@ -2020,6 +2020,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!54 &494680147 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4924572684236700789, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+  m_PrefabInstance: {fileID: 900750709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &499235395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3047,6 +3052,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1743402125860609191, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: headRB
+      value: 
+      objectReference: {fileID: 494680147}
+    - target: {fileID: 1743402125860609191, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: x_axis
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743402125860609191, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: y_axis
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743402125860609191, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
+      propertyPath: z_axis
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8453054675035652621, guid: 3ac54ea4bee651a4fb3fd994b9e5a3f4, type: 3}
       propertyPath: m_Name
       value: Enemigo_persona
@@ -9021,7 +9042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1922616769
 Transform:
   m_ObjectHideFlags: 0
