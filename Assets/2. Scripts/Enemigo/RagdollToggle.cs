@@ -7,6 +7,11 @@ public class RagdollToggle : MonoBehaviour
 
     private Rigidbody[] rigidbodies;
     public Animator animator;
+    public Rigidbody headRB;
+
+    public float x_axis;
+    public float y_axis;
+    public float z_axis;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,6 +28,7 @@ public class RagdollToggle : MonoBehaviour
             animator.enabled = !enabled;
             rigidbody.isKinematic = !enabled;
         }
+        headRB.AddForce(x_axis, y_axis, x_axis);
 
     }
 
@@ -34,14 +40,6 @@ public class RagdollToggle : MonoBehaviour
     {
         ToggleRagdoll(false);
         animator.Play("idle");
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            UnDoRagdoll();
-        }
     }
 
 }
