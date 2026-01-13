@@ -1,15 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EstadoTurnoEnemigo : EstadoDuelo
 {
     [Header("Configuración")]
     public float esperaAntesDeAnimacion = 1.5f;
 
+    public TextMeshProUGUI textoTurno;
+
     public override void Entrar()
     {
         Debug.Log("TURNO ENEMIGO: Pensando...");
         // 1. Esperamos el tiempo de "tensión" antes de movernos
         Invoke("OrdenDeAtacar", esperaAntesDeAnimacion);
+
+        textoTurno.gameObject.SetActive(true);
+        textoTurno.text = "Turno enemigo";
     }
 
     private void OrdenDeAtacar()

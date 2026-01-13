@@ -101,7 +101,7 @@ public class DueloManager : MonoBehaviour
         }
 
         if (enemigoActivo != null) enemigoActivo.gameObject.SetActive(false);
-        canvasDuelo.SetActive(true);
+        canvasDuelo.SetActive(false);
         Debug.Log("--- Combate Finalizado ---");
 
 
