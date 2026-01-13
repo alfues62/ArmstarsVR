@@ -26,6 +26,8 @@ public class DueloManager : MonoBehaviour
 
     public EstadoDuelo EstadoActual => estadoActual;
 
+    public GameObject canvasDuelo;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -77,6 +79,8 @@ public class DueloManager : MonoBehaviour
         Debug.Log(jugadorEmpiezaLaRonda ? ">>> Sorteo: Empieza JUGADOR" : ">>> Sorteo: Empieza ENEMIGO");
 
         CambiarEstado(estadoInicioRonda);
+
+        canvasDuelo.SetActive(true);
     }
 
     public void CambiarEstado(EstadoDuelo nuevoEstado)
@@ -97,6 +101,9 @@ public class DueloManager : MonoBehaviour
         }
 
         if (enemigoActivo != null) enemigoActivo.gameObject.SetActive(false);
+        canvasDuelo.SetActive(true);
         Debug.Log("--- Combate Finalizado ---");
+
+
     }
 }
