@@ -12,6 +12,7 @@ public class RagdollToggle : MonoBehaviour
     public float x_axis;
     public float y_axis;
     public float z_axis;
+    public float fuerza;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +29,7 @@ public class RagdollToggle : MonoBehaviour
             animator.enabled = !enabled;
             rigidbody.isKinematic = !enabled;
         }
-        headRB.AddForce(x_axis, y_axis, x_axis);
+        headRB.AddForce(x_axis * fuerza, y_axis * fuerza, z_axis * fuerza);
 
     }
 
