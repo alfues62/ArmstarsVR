@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 83
+  controlID: 44
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 44
+  controlID: 45
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 45
+  controlID: 46
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -376,15 +376,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: "C:\\Users\\Diego Baldov\xED\\Desktop\\Clases\\clases\\4-A\\NUEVO
-    - Proyecto de XR\\proyecto\\Sprint 3 VR\\ArmstarsVR"
+  m_LastProjectPath: C:\Users\PcVIP\Unity\ArmstarsVR
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: 10e50000
-    m_LastClickedID: 58640
-    m_ExpandedIDs: 0000000094e3000096e3000098e30000
+    m_SelectedIDs: b6f30000
+    m_LastClickedID: 62390
+    m_ExpandedIDs: 00000000bce30000bee30000c0e30000c2e30000c4e30000c6e30000c8e30000cae30000cce30000cee30000d0e30000d2e30000d4e30000d6e30000d8e30000dae30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -413,7 +412,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000094e3000096e3000098e30000
+    m_ExpandedIDs: 00000000bce30000bee30000c0e30000c2e30000c4e30000c6e30000c8e30000cae30000cce30000cee30000d0e30000d2e30000d4e30000d6e30000d8e30000dae30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -441,7 +440,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000d2d60000b0d400008ec70000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -561,7 +560,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 622dffffbc2effff303bffff305bffff0e6bffff7280ffffba95ffff1297ffff509bfffff4effffffeefffff12f0ffff1cf0ffff24f0ffff28f0ffff0ef8ffff0efbffffd4c40000cac5000008c60000d2740100
+      m_ExpandedIDs: 2ad7ffff92e0ffff40e6ffff96db0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1109,9 +1108,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 3.011438, y: -1.3581841, z: 0.9941347}
+    m_Target: {x: 2.2360897, y: 1.6448846, z: -16.249641}
     speed: 2
-    m_Value: {x: 3.011438, y: -1.3581841, z: 0.9941347}
+    m_Value: {x: 2.2360897, y: 1.6448846, z: -16.249641}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1157,13 +1156,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.087724596, y: -0.03947743, z: 0.0034352494, w: 0.9954234}
+    m_Target: {x: -0.1328858, y: 0.67304325, z: -0.12478325, w: -0.7168204}
     speed: 2
-    m_Value: {x: -0.087724596, y: 0.03947743, z: -0.0034352494, w: -0.9954234}
+    m_Value: {x: -0.1328858, y: 0.67304325, z: -0.12478325, w: -0.7168204}
   m_Size:
-    m_Target: 10.40772
+    m_Target: 1.2313764
     speed: 2
-    m_Value: 10.40772
+    m_Value: 1.2313764
   m_Ortho:
     m_Target: 0
     speed: 2
